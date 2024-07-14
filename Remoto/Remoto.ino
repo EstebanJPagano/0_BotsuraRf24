@@ -18,14 +18,15 @@ float datos[3];                                   //vector con los datos a envia
 //FIN nRF24L01
 
 #define speed_Med 22
-#define Btn24 24
+#define Btn24 34
 #define Btn26 26
 #define speed_Min 28
 #define speed_Max 30
 #define Btn32 32
+#define Btn53 53
 
 //MOVIMIENTO TIPO TANQUE
-#define TANQUE_DER_FW 35
+#define TANQUE_DER_FW 34
 #define TANQUE_DER_RV 49
 #define TANQUE_IZQ_FW 31
 #define TANQUE_IZQ_RV 33
@@ -91,6 +92,9 @@ void setup() {
 
   pinMode(BTN_JOYSTICK_DER, INPUT_PULLUP);
   pinMode(BTN_JOYSTICK_IZQ, INPUT_PULLUP);
+  pinMode(Btn53, INPUT_PULLUP);
+  
+  
 }
 
 void loop() {
@@ -101,104 +105,107 @@ void loop() {
   bool ok = radio.write(datos, sizeof(datos));//enviamos los datos
 
 
-  //reportamos por el puerto serial los datos enviados
-  if (ok) {
-    if (digitalRead(TANQUE_DER_FW) == LOW) {  // si se presiona PULSADOR1
-      int msg = 5;
-      datos[2] = msg;
-      mensajeCortoPantalla("TANQUE_DER_FW");
-      Serial.println("TANQUE_DER_FW");
-    } else if (digitalRead(TANQUE_DER_RV) == LOW) {  // si se presiona PULSADOR1
-      int msg = 6;
-      datos[2] = msg;
-      mensajeCortoPantalla("TANQUE_IZQ_FW");
-      Serial.println("TANQUE_IZQ_FW");
-    } else if (digitalRead(TANQUE_IZQ_FW) == LOW) {  // si se presiona PULSADOR1
-      int msg = 7;
-      datos[2] = msg;
-      mensajeCortoPantalla("TANQUE_IZQ_FW");
-      Serial.println("TANQUE_IZQ_FW");
-    } else if (digitalRead(TANQUE_IZQ_RV) == LOW) {  // si se presiona PULSADOR1
-      int msg = 8;
-      datos[2] = msg;
-      mensajeCortoPantalla("TANQUE_IZQ_RV");
-      Serial.println("TANQUE_IZQ_RV");
-    } else if (digitalRead(CRUZE_FORWARD) == LOW) {  // si se presiona PULSADOR1
-      int msg = 1;
-      datos[2] = msg;
-      mensajeCortoPantalla("CRUZE_FORWARD");
-      Serial.println("CRUZE_FORWARD");
-    } else if (digitalRead(CRUZE_REVERSE) == LOW) {  // si se presiona PULSADOR1
-      int msg = 2;
-      datos[2] = msg;
-      mensajeCortoPantalla("CRUZE_REVERSE");
-      Serial.println("CRUZE_REVERSE");
-    } else if (digitalRead(CRUZETA__LEFT) == LOW) {  // si se presiona PULSADOR1
-      int msg = 3;
-      datos[2] = msg;
-      mensajeCortoPantalla("CRUZETA__LEFT");
-      Serial.println("CRUZETA__LEFT");
-    } else if (digitalRead(CRUZETA_RIGHT) == LOW) {  // si se presiona PULSADOR1
-      int msg = 4;
-      datos[2] = msg;
-      mensajeCortoPantalla("CRUZETA_RIGHT");
-      Serial.println("CRUZETA_RIGHT");
-    } else if (digitalRead(LUCES) == LOW) {  // si se presiona PULSADOR1
-      int msg = 15;
-      datos[2] = msg;
-      mensajeCortoPantalla("LUCES");
-      Serial.println("LUCES");
-    } else if (digitalRead(BAILA) == LOW) {  // si se presiona PULSADOR1
-      int msg = 9;
-      datos[2] = msg;
-      mensajeCortoPantalla("BAILA");
-      Serial.println("BAILA");
-    } else if (digitalRead(LAZER) == LOW) {  // si se presiona PULSADOR1
-      int msg = 10;
-      datos[2] = msg;
-      mensajeCortoPantalla("LAZER");
-      Serial.println("LAZER");
-    } else if (digitalRead(speed_Max) == LOW) {
-      int msg = 255;
-      datos[2] = msg;
-      Serial.println("speed_Max");
-      mensajeCortoPantalla("Velocidad Maxima");
-    } else if (digitalRead(speed_Med) == LOW) {
-      int msg = 160;
-      datos[2] = msg;
-      Serial.println("speed_Med");
-      mensajeCortoPantalla("Velocidad Media");
-
-    } else if (digitalRead(speed_Min) == LOW) {
-      int msg = 90;
-      datos[2] = msg;
-      Serial.println("speed_Min");
-      mensajeCortoPantalla("Velocidad Minima");
-
-    } else if (digitalRead(Btn24) == LOW) {
-      Serial.println("Btn24");
-    } else if (digitalRead(Btn26) == LOW) {
-      Serial.println("Btn26");
-    } else if (digitalRead(Btn32) == LOW) {
-      Serial.println("Btn32");
-    } else if (digitalRead(BTN_JOYSTICK_DER) == LOW) {
-      Serial.println("BTN_JOYSTICK_DER");
-    } else if (digitalRead(BTN_JOYSTICK_IZQ) == LOW) {
-      Serial.println("BTN_JOYSTICK_IZQ");
-    } else {
-      int msg = 0;
-      datos[2] = msg;
+    if (digitalRead(Btn53) == LOW) {  // si se presiona PULSADOR1
+         Serial.println("si53");
     }
-
-    Serial.print("Datos enviados: ");
-    Serial.print(datos[0]);
-    Serial.print(" , ");
-    Serial.print(datos[1]);
-    Serial.print(" , ");
-    Serial.println(datos[2]);
-  } else {
-    Serial.println("no se ha podido enviar");
-  }
+//  //reportamos por el puerto serial los datos enviados
+//  if (ok) {
+//    if (digitalRead(TANQUE_DER_FW) == LOW) {  // si se presiona PULSADOR1
+//      int msg = 5;
+//      datos[2] = msg;
+//      mensajeCortoPantalla("TANQUE_DER_FW");
+//      Serial.println("TANQUE_DER_FW");
+//    } else if (digitalRead(TANQUE_DER_RV) == LOW) {  // si se presiona PULSADOR1
+//      int msg = 6;
+//      datos[2] = msg;
+//      mensajeCortoPantalla("TANQUE_IZQ_FW");
+//      Serial.println("TANQUE_IZQ_FW");
+//    } else if (digitalRead(TANQUE_IZQ_FW) == LOW) {  // si se presiona PULSADOR1
+//      int msg = 7;
+//      datos[2] = msg;
+//      mensajeCortoPantalla("TANQUE_IZQ_FW");
+//      Serial.println("TANQUE_IZQ_FW");
+//    } else if (digitalRead(TANQUE_IZQ_RV) == LOW) {  // si se presiona PULSADOR1
+//      int msg = 8;
+//      datos[2] = msg;
+//      mensajeCortoPantalla("TANQUE_IZQ_RV");
+//      Serial.println("TANQUE_IZQ_RV");
+//    } else if (digitalRead(CRUZE_FORWARD) == LOW) {  // si se presiona PULSADOR1
+//      int msg = 1;
+//      datos[2] = msg;
+//      mensajeCortoPantalla("CRUZE_FORWARD");
+//      Serial.println("CRUZE_FORWARD");
+//    } else if (digitalRead(CRUZE_REVERSE) == LOW) {  // si se presiona PULSADOR1
+//      int msg = 2;
+//      datos[2] = msg;
+//      mensajeCortoPantalla("CRUZE_REVERSE");
+//      Serial.println("CRUZE_REVERSE");
+//    } else if (digitalRead(CRUZETA__LEFT) == LOW) {  // si se presiona PULSADOR1
+//      int msg = 3;
+//      datos[2] = msg;
+//      mensajeCortoPantalla("CRUZETA__LEFT");
+//      Serial.println("CRUZETA__LEFT");
+//    } else if (digitalRead(CRUZETA_RIGHT) == LOW) {  // si se presiona PULSADOR1
+//      int msg = 4;
+//      datos[2] = msg;
+//      mensajeCortoPantalla("CRUZETA_RIGHT");
+//      Serial.println("CRUZETA_RIGHT");
+//    } else if (digitalRead(LUCES) == LOW) {  // si se presiona PULSADOR1
+//      int msg = 15;
+//      datos[2] = msg;
+//      mensajeCortoPantalla("LUCES");
+//      Serial.println("LUCES");
+//    } else if (digitalRead(BAILA) == LOW) {  // si se presiona PULSADOR1
+//      int msg = 9;
+//      datos[2] = msg;
+//      mensajeCortoPantalla("BAILA");
+//      Serial.println("BAILA");
+//    } else if (digitalRead(LAZER) == LOW) {  // si se presiona PULSADOR1
+//      int msg = 10;
+//      datos[2] = msg;
+//      mensajeCortoPantalla("LAZER");
+//      Serial.println("LAZER");
+//    } else if (digitalRead(speed_Max) == LOW) {
+//      int msg = 255;
+//      datos[2] = msg;
+//      Serial.println("speed_Max");
+//      mensajeCortoPantalla("Velocidad Maxima");
+//    } else if (digitalRead(speed_Med) == LOW) {
+//      int msg = 160;
+//      datos[2] = msg;
+//      Serial.println("speed_Med");
+//      mensajeCortoPantalla("Velocidad Media");
+//
+//    } else if (digitalRead(speed_Min) == LOW) {
+//      int msg = 90;
+//      datos[2] = msg;
+//      Serial.println("speed_Min");
+//      mensajeCortoPantalla("Velocidad Minima");
+//
+//    } else if (digitalRead(Btn24) == LOW) {
+//      Serial.println("Btn24");
+//    } else if (digitalRead(Btn26) == LOW) {
+//      Serial.println("Btn26");
+//    } else if (digitalRead(Btn32) == LOW) {
+//      Serial.println("Btn32");
+//    } else if (digitalRead(BTN_JOYSTICK_DER) == LOW) {
+//      Serial.println("BTN_JOYSTICK_DER");
+//    } else if (digitalRead(BTN_JOYSTICK_IZQ) == LOW) {
+//      Serial.println("BTN_JOYSTICK_IZQ");
+//    } else {
+//      int msg = 0;
+//      datos[2] = msg;
+//    }
+//
+//    Serial.print("Datos enviados: ");
+//    Serial.print(datos[0]);
+//    Serial.print(" , ");
+//    Serial.print(datos[1]);
+//    Serial.print(" , ");
+//    Serial.println(datos[2]);
+//  } else {
+//    Serial.println("no se ha podido enviar");
+//  }
 
   delay(100);
 }
